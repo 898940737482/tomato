@@ -1,0 +1,69 @@
+{% extends 'base2.html' %}
+{% block body %}
+{% load static %}
+
+<div class="col-md-6">
+    <div class="page-header">
+        <h2>Team</h2>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Designation</th>
+                <th>Delete</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in team %}
+            <tr>
+                <td>{{ i.name }}</td>
+                <td>{{ i.designation }}</td>
+                <form method='post'>
+                {% csrf_token %}
+                <td>
+                    <button type="submit" name="delete" value="{{ i.id}}" class="btn btn-danger btn-xs">Delete</button>
+                </td>  
+                </form> 
+            {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="col-md-6">
+    <div class="page-header">
+        <h2>Add Team</h2>
+    </div>
+    <form method='post' enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="form-group">
+            <label for="">Enter Name</label>
+            <input type="text" name='name' class="form-control" id="" placeholder="Name">
+        </div>
+        <div class="form-group">
+            <label for="">Enter Designation</label>
+            <input type="text" name='designation' class="form-control" id="" placeholder="Designation">
+        </div>
+        <div class="form-group">
+            <label for="">Facebook</label>
+            <input type="text" name='fb' class="form-control" id="" placeholder="Facebook">
+        </div>
+        <div class="form-group">
+            <label for="">Instagram</label>
+            <input type="text" name='insta' class="form-control" id="" placeholder="Instagram">
+        </div>
+        <div class="form-group">
+            <label for="">Twitter</label>
+            <input type="text" name='twt' class="form-control" id="" placeholder="Twitter">
+        </div>
+        <div class="form-group">
+            <label for="">Profile Picture</label>
+            <input type="file" name='img' class="form-control" id="" placeholder="">
+        </div>
+        <button type="submit" name='add' class="btn btn-default">Submit</button>
+    </form>
+</div>
+
+{% endblock %}
